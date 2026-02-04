@@ -1,6 +1,6 @@
-import rl from "readline-sync";
 import { colors } from './src/util/Colors';
 import { Conta } from "./src/model/Conta"; // Import da classe Conta
+import { Input } from './src/util/Input';
 
 function main() {
 
@@ -8,7 +8,7 @@ function main() {
 
     // Instanciar Objetos da Classe Conta
     const c1 = new Conta(1, 1234, "Sofia", 1, 100000.00);
-    
+
     c1.visualizar();
 
     //Testes do Método Sacar
@@ -44,8 +44,8 @@ function main() {
         console.log("\n**********************************************",
             colors.reset);
 
-        console.log("Entre com a opção desejada: ");
-        opcao = rl.questionInt("");
+        console.log("Entre com a opção desejada: ")
+        opcao = Input.questionInt("");
 
         if (opcao === 9) {
             sobreProjeto();
@@ -134,5 +134,5 @@ export function sobreProjeto(): void {
 
 function keyPress(): void {
     console.log(colors.fg.yellow, "Pressione enter para continuar...", colors.reset);
-    rl.prompt();
+    Input.prompt();
 }

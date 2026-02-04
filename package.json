@@ -1,0 +1,28 @@
+{
+  "name": "contabancaria",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jeaninny/ProjetoContaBancaria.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Jeaninny/ProjetoContaBancaria/issues"
+  },
+  "homepage": "https://github.com/Jeaninny/ProjetoContaBancaria#readme",
+  "dependencies": {
+    "@types/node": "^25.2.0",
+    "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {
+    "@types/readline-sync": "^1.4.8"
+  }
+}

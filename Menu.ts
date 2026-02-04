@@ -1,4 +1,4 @@
-import readlinesync from "readline-sync";
+import rl from "readline-sync";
 import { colors } from './src/util/Colors';
 
 function main() {
@@ -22,8 +22,8 @@ function main() {
         console.log("\n**********************************************",
             colors.reset);
 
-
-        opcao = readlinesync.questionInt("Entre com a opção desejada: ");
+        console.log("Entre com a opção desejada: ");
+        opcao = rl.questionInt("");
 
         if (opcao === 9) {
             sobreProjeto();
@@ -35,54 +35,63 @@ function main() {
                 console.log(colors.fg.whitestrong,
                     "Criar Conta",
                     colors.reset);
+                keyPress();
                 break;
 
             case 2:
                 console.log(colors.fg.whitestrong,
                     "Listar todas as Contas",
                     colors.reset);
+                keyPress();
                 break;
 
             case 3:
                 console.log(colors.fg.whitestrong,
                     "Buscar Conta por Numero",
                     colors.reset);
+                keyPress();
                 break;
 
             case 4:
                 console.log(colors.fg.whitestrong,
                     "Atualizar Dados da Conta",
                     colors.reset);
+                keyPress();
                 break;
 
             case 5:
                 console.log(colors.fg.whitestrong,
                     "Apagar Conta",
                     colors.reset);
+                keyPress();
                 break;
 
             case 6:
                 console.log(colors.fg.whitestrong,
                     "Saque",
                     colors.reset);
+                keyPress();
                 break;
 
             case 7:
                 console.log(colors.fg.whitestrong,
                     "Depósito",
                     colors.reset);
+                keyPress();
                 break;
 
             case 8:
                 (colors.fg.whitestrong,
                     "Transferir valores entre Contas",
                     colors.reset);
+                keyPress();
                 break;
 
             default:
                 (colors.fg.whitestrong,
                     "Operação inválida! Tente novamente.",
-                    colors.reset)
+                    colors.reset);
+                keyPress();
                 break;
         }
     }
@@ -90,7 +99,7 @@ function main() {
 
 main();
 
-function sobreProjeto(): void {
+export function sobreProjeto(): void {
     console.log(colors.fg.greenstrong,
         "\nBanco do Brazil com Z - O seu Futuro começa aqui! ",
         colors.reset, "");
@@ -99,4 +108,9 @@ function sobreProjeto(): void {
     console.log(" jeaninny.teixeira@gmail.com");
     console.log(" github.com/Jeaninny", colors.reset, "");
     console.log("**************************************************");
+}
+
+function keyPress(): void {
+    console.log(colors.fg.yellow, "Pressione enter para continuar...", colors.reset);
+    rl.prompt();
 }

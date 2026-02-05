@@ -1,37 +1,36 @@
-import { colors } from './src/util/Colors';
-import { Conta } from "./src/model/Conta"; // Import da classe Conta
 import { Input } from './src/util/Input';
+import { Conta } from './src/model/Conta';
+import { ContaCorrente } from './src/model/ContaCorrente';
+import { ContaPoupanca } from './src/model/ContaPoupanca';
+import { colors } from './src/util/Colors';
 
 function main() {
-
     let opcao: number;
 
-    // Instanciar Objetos da Classe Conta
-    const c1 = new Conta(1, 1234, "Sofia", 1, 100000.00);
+    //Testes da Classe Conta Corrente
+    const cc1 = new ContaCorrente(2, 5678, "Bianca", 1, 200000.00, 2000.00);
+    cc1.visualizar();
 
-    c1.visualizar();
+    //Testes do Método Sacar - Conta Corrente
+    console.log("Sacar 1000,00: ", cc1.sacar(1000.00));
+    console.log("Sacar 200000,00: ", cc1.sacar(200000.00));
+    cc1.depositar(500.00);
+    cc1.visualizar();
 
-    //Testes do Método Sacar
-    console.log("Sacar 100,00: ", c1.sacar(100.00));
-    console.log("Sacar 200000,00: ", c1.sacar(200000.00));
-    console.log("Sacar 0.00: ", c1.sacar(0.00));
-
-    //Testes do Método Depositar
-    console.log("Depositar -10.00: ");
-    c1.depositar(-10.00);
-
-    console.log("Depositar 500.00: ");
-    c1.depositar(500.00);
-
-    c1.visualizar();
-
+    // Testes da Classe Conta Poupança
+    const cp1 = new ContaPoupanca(3, 98765, "Jeaninny", 2, 50000.00, 22);
+    cp1.visualizar();
+    console.log("Sacar 1000,00: ", cp1.sacar(1000.00));
+    console.log("Sacar 400000,00: ", cp1.sacar(400000.00));
+    cp1.depositar(500.00);
+    cp1.visualizar();
 
     // Criação do Menu
     while (true) {
         console.log(colors.fg.magenta,
-            "\n**********************************************");
-        console.log("\n             BANCO DO BRAZIL COM Z            ");
-        console.log("\n**********************************************");
+            "**********************************************");
+        console.log("             BANCO DO BRAZIL COM Z            ");
+        console.log("**********************************************");
         console.log("\n           1 - Criar Conta                    ");
         console.log("           2 - Listar todas as Contas           ");
         console.log("           3 - Buscar Conta por Numero          ");

@@ -1,6 +1,6 @@
 import { colors } from "../util/Colors";
 
-export class Conta {
+export abstract class Conta {
 
     // Atributos da Classe
     private _numero: number;
@@ -74,7 +74,9 @@ export class Conta {
         if (valor <= 0) {
             console.log(colors.fg.red, "O valor deve ser positivo! ", colors.reset);
             return false;
-        } else if (valor > this._saldo) {
+        }
+
+        if (valor > this._saldo) {
             console.log(colors.fg.red, "Saldo Insuficiente! ", colors.reset);
             return false;
         }
@@ -85,7 +87,7 @@ export class Conta {
 
     public visualizar(): void {
 
-        let tipoConta: String;
+        let tipoConta: string;
 
         switch (this._tipo) {
             case 1:
@@ -98,14 +100,13 @@ export class Conta {
                 tipoConta = "Tipo Inválido";
         }
 
-        console.log("\n******************************");
+        console.log(colors.fg.red, "******************************", colors.reset);
         console.log("        DADOS DA CONTA        ");
-        console.log("******************************");
+        console.log(colors.fg.red, "******************************", colors.reset);
         console.log(`Número da conta: ${this._numero}`);
         console.log(`Número da agência: ${this._agencia}`);
         console.log(`Nome do titular: ${this._titular}`);
         console.log(`Tipo da conta: ${tipoConta}`);
         console.log(`Saldo da conta: R$ ${this._saldo.toFixed(2)}`);
     }
-
 }

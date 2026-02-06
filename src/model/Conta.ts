@@ -1,4 +1,4 @@
-import { colors } from "../util/Colors";
+import { Colors } from "../util/Colors";
 
 export abstract class Conta {
 
@@ -63,7 +63,7 @@ export abstract class Conta {
 
     public depositar(valor: number): void {
         if (valor <= 0) {
-            console.log(colors.fg.red, "O valor deve ser positivo! ", colors.reset);
+            console.log(Colors.fg.red, "O valor deve ser positivo! ", Colors.reset);
         } else {
             this._saldo += valor;
         }
@@ -72,12 +72,12 @@ export abstract class Conta {
     public sacar(valor: number): boolean {
 
         if (valor <= 0) {
-            console.log(colors.fg.red, "O valor deve ser positivo! ", colors.reset);
+            console.log(Colors.fg.red, "O valor deve ser positivo! ", Colors.reset);
             return false;
         }
 
         if (valor > this._saldo) {
-            console.log(colors.fg.red, "Saldo Insuficiente! ", colors.reset);
+            console.log(Colors.fg.red, "Saldo Insuficiente! ", Colors.reset);
             return false;
         }
 
@@ -100,9 +100,9 @@ export abstract class Conta {
                 tipoConta = "Tipo Inválido";
         }
 
-        console.log(colors.fg.red, "******************************", colors.reset);
+        console.log(Colors.fg.red, "******************************", Colors.reset);
         console.log("        DADOS DA CONTA        ");
-        console.log(colors.fg.red, "******************************", colors.reset);
+        console.log(Colors.fg.red, "******************************", Colors.reset);
         console.log(`Número da conta: ${this._numero}`);
         console.log(`Número da agência: ${this._agencia}`);
         console.log(`Nome do titular: ${this._titular}`);

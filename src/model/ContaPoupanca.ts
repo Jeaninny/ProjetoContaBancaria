@@ -1,4 +1,4 @@
-import { colors } from "../util/Colors";
+import { Colors } from "../util/Colors";
 import { Conta } from "./Conta";
 
 export class ContaPoupanca extends Conta {

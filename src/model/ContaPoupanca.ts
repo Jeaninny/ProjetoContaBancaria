@@ -4,7 +4,6 @@ import { Conta } from "./Conta";
 export class ContaPoupanca extends Conta {
 
     // Atributos específicos de Conta Poupança
-
     private _aniversario: number;
 
     // Método Construtor
@@ -21,7 +20,6 @@ export class ContaPoupanca extends Conta {
     }
 
     //Métodos Getters e Setters específicos da classe Conta Corrente
-
     public get aniversario(): number {
         return this._aniversario;
     }
@@ -32,9 +30,9 @@ export class ContaPoupanca extends Conta {
 
     //Sobrescrevendo métodos
 
-    //Método Visualizar sobrescrito
+    //Método visualizar() sobrescrito
     public visualizar(): void {
         super.visualizar();
-        console.log(`Aniversário da Conta: ${this._aniversario} de cada mês`);
+        console.log(`Aniversário da Conta: dia ${this._aniversario} de cada mês`);
     }
 }

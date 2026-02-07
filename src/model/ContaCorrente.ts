@@ -1,4 +1,5 @@
 import { Colors } from "../util/Colors";
+import { formatarMoeda } from "../util/Currency";
 import { Conta } from "./Conta";
 
 export class ContaCorrente extends Conta {
@@ -7,9 +8,7 @@ export class ContaCorrente extends Conta {
 
     private _limite: number;
 
-    // Método super serve para chamar a super classe
-    // Depois que chama, adicionamos o atributo limite
-    // e vira conta corrente.
+    // Construtor com a chamada para a Super Classe
 
     constructor(numero: number,
         agencia: number,
@@ -33,9 +32,8 @@ export class ContaCorrente extends Conta {
 
     //Sobrescrevendo métodos
 
-    //Método Sacar sobrescrito
+    //Método sacar() sobrescrito
     public sacar(valor: number): boolean {
-
         if (valor <= 0) {
             console.log(Colors.fg.red, "O valor deve ser positivo! ", Colors.reset);
             return false;
@@ -49,10 +47,9 @@ export class ContaCorrente extends Conta {
         return true;
     }
 
-    //Método Visualizar sobrescrito
+    //Método visualizar() sobrescrito
     public visualizar(): void {
         super.visualizar();
-        console.log(`Limite da conta: R$ ${this._limite.toFixed(2)}`);
+        console.log(`Limite da conta: R$ ${formatarMoeda(this._limite)}`);
     }
-
 }

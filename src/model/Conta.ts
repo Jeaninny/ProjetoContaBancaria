@@ -1,8 +1,10 @@
 import { Colors } from "../util/Colors";
+import { formatarMoeda } from "../util/Currency";
 
 export abstract class Conta {
 
     // Atributos da Classe
+    
     private _numero: number;
     private _agencia: number;
     private _titular: string;
@@ -10,6 +12,7 @@ export abstract class Conta {
     private _saldo: number;
 
     // Método Construtor
+
     constructor(numero: number, agencia: number, titular: string, tipo: number, saldo: number) {
         this._numero = numero;
         this._agencia = agencia;
@@ -19,6 +22,7 @@ export abstract class Conta {
     }
 
     // Métodos getters e setters
+
     public get numero(): number {
         return this._numero;
     }
@@ -63,16 +67,15 @@ export abstract class Conta {
 
     public depositar(valor: number): void {
         if (valor <= 0) {
-            console.log(Colors.fg.red, "O valor deve ser positivo! ", Colors.reset);
+            console.log(Colors.fg.red, "\nO valor deve ser positivo! ", Colors.reset);
         } else {
             this._saldo += valor;
         }
     }
 
     public sacar(valor: number): boolean {
-
         if (valor <= 0) {
-            console.log(Colors.fg.red, "O valor deve ser positivo! ", Colors.reset);
+            console.log(Colors.fg.red, "\nO valor deve ser positivo! ", Colors.reset);
             return false;
         }
 
@@ -80,13 +83,11 @@ export abstract class Conta {
             console.log(Colors.fg.red, "Saldo Insuficiente! ", Colors.reset);
             return false;
         }
-
         this._saldo -= valor;
         return true;
     }
 
     public visualizar(): void {
-
         let tipoConta: string;
 
         switch (this._tipo) {
@@ -99,14 +100,18 @@ export abstract class Conta {
             default:
                 tipoConta = "Tipo Inválido";
         }
-
-        console.log(Colors.fg.red, "******************************", Colors.reset);
-        console.log("        DADOS DA CONTA        ");
-        console.log(Colors.fg.red, "******************************", Colors.reset);
+        console.log("\n");
+        console.log(Colors.fg.red,
+            "******************************",
+            Colors.reset);
+        console.log("         DADOS DA CONTA              ");
+        console.log(Colors.fg.red,
+            "******************************",
+            Colors.reset);
         console.log(`Número da conta: ${this._numero}`);
         console.log(`Número da agência: ${this._agencia}`);
         console.log(`Nome do titular: ${this._titular}`);
         console.log(`Tipo da conta: ${tipoConta}`);
-        console.log(`Saldo da conta: R$ ${this._saldo.toFixed(2)}`);
+        console.log(`Saldo da conta: R$ ${formatarMoeda(this._saldo)}`);
     }
 }

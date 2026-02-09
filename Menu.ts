@@ -32,6 +32,7 @@ export function main() {
         console.log("           6 - Sacar                                     ");
         console.log("           7 - Depositar                                 ");
         console.log("           8 - Transferir valores entre Contas           ");
+        console.log("           9 - Buscar Conta por Nome do Titular          ");
         console.log("           0 - Sair                                      ");
         console.log("*********************************************************",
             Colors.reset);
@@ -92,6 +93,7 @@ export function main() {
                 console.log(Colors.fg.whitestrong,
                     "\n\nSaque\n\n",
                     Colors.reset);
+                sacarConta();
                 keyPress();
                 break;
 
@@ -99,6 +101,7 @@ export function main() {
                 console.log(Colors.fg.whitestrong,
                     "\n\nDepósito\n\n",
                     Colors.reset);
+                depositarConta();
                 keyPress();
                 break;
 
@@ -106,6 +109,14 @@ export function main() {
                 console.log(Colors.fg.whitestrong,
                     "\n\nTransferir valores entre Contas\n\n",
                     Colors.reset);
+                transferirEntreContas();
+                keyPress();
+                break;
+            case 9:
+                console.log(Colors.fg.whitestrong,
+                    "\n\nBuscar Conta por Nome do Titular\n\n",
+                    Colors.reset);
+                procurarPorTitular();
                 keyPress();
                 break;
 
@@ -277,6 +288,75 @@ function deletarContaPorNumero(): void {
     }
 }
 
+// Opção 6: Sacar de uma Conta
+
+function sacarConta(): void {
+    console.log("Digite o número da Conta: ");
+    const numero = Input.questionInt("");
+
+    const conta = contas.buscarNoArray(numero);
+
+    if (conta !== null) {
+        console.log("Digite o valor do saque (R$): ");
+        const valorSaque = Input.questionFloat("");
+        contas.sacar(numero, valorSaque);
+    } else {
+        console.log(Colors.fg.red, `A conta número ${numero} não foi encontrada!`, Colors.reset);
+    }
+}
+
+// Opção 7: Depositar em uma Conta
+function depositarConta(): void {
+    console.log("Digite o número da Conta: ");
+    const numero = Input.questionInt("");
+
+    const conta = contas.buscarNoArray(numero);
+
+    if (conta !== null) {
+        console.log("Digite o valor do depósito (R$): ");
+        const valorDeposito = Input.questionFloat("");
+
+        contas.depositar(numero, valorDeposito);
+    } else {
+        console.log(Colors.fg.red, `A conta número ${numero} não foi encontrada!`, Colors.reset);
+    }
+}
+// Opção 8: Transferir valores entre Contas
+
+function transferirEntreContas(): void {
+    console.log("Digite o número da Conta de origem: ");
+    const numeroOrigem = Input.questionInt("");
+
+    console.log("Digite o número da Conta de Destino: ");
+    const numeroDestino = Input.questionInt("");
+
+    const contaOrigem = contas.buscarNoArray(numeroOrigem);
+    const contaDestino = contas.buscarNoArray(numeroDestino);
+
+    if (contaOrigem === null) {
+        console.log(Colors.fg.red, `A conta de origem ${numeroOrigem} não foi encontrada!`, Colors.reset);
+
+    } else if (contaDestino === null) {
+        console.log(Colors.fg.red, `A conta de destino ${numeroDestino} não foi encontrada!`, Colors.reset);
+        
+    } else {
+        console.log("Digite o valor da transferência (R$): ");
+        const valorTransferencia = Input.questionFloat("");
+        contas.transferir(numeroOrigem, numeroDestino, valorTransferencia);
+    }
+}
+
+// Opção 9: Procurar Conta por Nome do Titular
+
+function procurarPorTitular(): void {
+
+    //Solicita o nome do titular
+    console.log("Digite o nome do Titular da Conta");
+    const titular = Input.question("");
+
+    // Localiza a conta a partir do nome do titular
+    contas.procurarPorTitular(titular);
+}
 
 // Função com os dados da pessoa desenvolvedora
 export function sobreProjeto(): void {

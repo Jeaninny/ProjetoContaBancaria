@@ -1,6 +1,9 @@
 import { Conta } from "../model/Conta";
+import { ContaCorrente } from "../model/ContaCorrente";
 import { ContaRepository } from "../repository/ContaRepository";
 import { Colors } from "../util/Colors";
+import { formatarMoeda } from "../util/Currency";
+
 export class ContaController implements ContaRepository {
 
     // Atributos
@@ -23,6 +26,21 @@ export class ContaController implements ContaRepository {
     listarTodas(): void {
         for (let conta of this.listaContas) {
             conta.visualizar();
+        }
+    }
+
+    procurarPorTitular(titular: string): void {
+        // Filtragem dos dados
+        const buscaPorTitular = this.listaContas.filter(conta =>
+            conta.titular.toUpperCase().includes(titular.toUpperCase())
+        );
+
+        // Listagem dos dados filtrados
+        if (buscaPorTitular.length > 0) {
+            console.log(Colors.fg.green, `\nLista de Contas com o Nome de Titular: ${titular}:`, Colors.reset);
+            buscaPorTitular.forEach(conta => conta.visualizar());
+        } else {
+            console.log(Colors.fg.red, `\nNenhuma conta foi encontrada com nome de Titular: ${titular}:`, Colors.reset);
         }
     }
 
@@ -60,15 +78,58 @@ export class ContaController implements ContaRepository {
     // Métodos Bancários
 
     sacar(numero: number, valor: number): void {
-        throw new Error("Method not implemented.");
+        const buscaConta = this.buscarNoArray(numero);
+
+        if (buscaConta !== null) {
+            console.log(`Saldo atual: ${formatarMoeda(buscaConta.saldo)}`);
+            console.log(`Valor do Saque: ${formatarMoeda(valor)}`);
+
+            if (buscaConta.sacar(valor) === true)
+                console.log(Colors.fg.green,
+                    `O saque no valor de ${formatarMoeda(valor)} na Conta Número: ${numero} foi realizado com sucesso!`,
+                    Colors.reset);
+            console.log(`Saldo atualizado: ${formatarMoeda(buscaConta.saldo)}`);
+
+        } else {
+            console.log(Colors.fg.red,
+                `A Conta número: ${numero} não foi encontrada! `,
+                Colors.reset);
+        }
     }
 
     depositar(numero: number, valor: number): void {
-        throw new Error("Method not implemented.");
+        const buscaConta = this.buscarNoArray(numero);
+
+        if (buscaConta !== null) {
+            buscaConta.depositar(valor);
+            console.log(Colors.fg.green,
+                `O depósito no valor de ${formatarMoeda(valor)} na Conta Número: ${numero} foi realizado com sucesso!`,
+                Colors.reset);
+        } else {
+            console.log(Colors.fg.red,
+                `A Conta número: ${numero} não foi encontrada! `,
+                Colors.reset);
+        }
     }
 
     transferir(numeroOrigem: number, numeroDestino: number, valor: number): void {
-        throw new Error("Method not implemented.");
+        const buscaContaOrigem = this.buscarNoArray(numeroOrigem);
+        const buscaContaDestino = this.buscarNoArray(numeroDestino);
+
+        if (buscaContaOrigem !== null && buscaContaDestino !== null) {
+
+            if (buscaContaOrigem.sacar(valor) === true) {
+                buscaContaDestino.depositar(valor);
+
+                console.log(Colors.fg.green,
+                    `\nA transferência no valor de ${formatarMoeda(valor)} da Conta número: ${numeroOrigem} para a Conta número: ${numeroDestino} foi efetuada com sucesso! `,
+                    Colors.reset)
+            }
+        } else {
+            console.log(Colors.fg.red,
+                `A Conta de Origem ${numeroOrigem} e/ou Conta de Destino ${numeroDestino} não foram encontradas! `,
+                Colors.reset)
+        }
     }
 
     // Métodos Auxiliares

@@ -250,7 +250,7 @@ Este projeto está sob licença **MIT** — livre para uso educacional e profiss
 
 
 
-**Rafael — Desenvolvedor Full Stack & Instrutor**
+**Jeaninny Teixeira - Desenvolvedora FullStack**
 
 🔗 **GitHub:** https://github.com/Jeaninny
 
